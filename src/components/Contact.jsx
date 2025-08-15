@@ -1,10 +1,68 @@
-import React from 'react';
+import React, { useState } from "react";
 
 function Contact() {
-  const handleSubmit = (e) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [status, setStatus] = useState(null); // 'success' | 'error' | null
+
+  // Configure your Formspree form ID via Vite env or inline string
+  const formspreeFormId = import.meta.env.VITE_FORMSPREE_FORM_ID || "";
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert("Thank you for contacting me! I will respond as soon as possible.");
-    e.target.reset();
+
+    if (!formspreeFormId) {
+      setStatus("error");
+      console.error(
+        "Missing VITE_FORMSPREE_FORM_ID. Add it to your .env and restart."
+      );
+      return;
+    }
+
+    const form = e.target;
+    const formData = new FormData(form);
+
+    // Honeypot: if filled, treat as spam and "succeed" silently
+    const honeypot = formData.get("website");
+    if (honeypot) {
+      setStatus("success");
+      form.reset();
+      return;
+    }
+
+    const payload = {
+      name: formData.get("name"),
+      email: formData.get("email"),
+      message: formData.get("message"),
+      _subject: "New message from portfolio contact form",
+    };
+
+    try {
+      setIsSubmitting(true);
+      setStatus(null);
+      const response = await fetch(
+        `https://formspree.io/f/${formspreeFormId}`,
+        {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      if (response.ok) {
+        setStatus("success");
+        form.reset();
+      } else {
+        setStatus("error");
+      }
+    } catch (err) {
+      console.error(err);
+      setStatus("error");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -12,22 +70,81 @@ function Contact() {
       <div className="container">
         <h2 className="contact-text mb-4 text-center">Contact Me</h2>
         <div className="row justify-content-center">
-          <p className="contact-desc">Have any concerns or wishes? Fill-up the form below!</p>
+          <p className="contact-desc">
+            Have any concerns or wishes? Fill-up the form below!
+          </p>
           <div className="col-md-6">
-            <form id="contactForm" className="contact-form" onSubmit={handleSubmit}>
+            <form
+              id="contactForm"
+              className="contact-form"
+              onSubmit={handleSubmit}
+              noValidate
+            >
+              {/* Honeypot field (hidden for users) */}
+              <input
+                type="text"
+                name="website"
+                className="d-none"
+                tabIndex="-1"
+                autoComplete="off"
+              />
               <div className="mb-3">
-                <label htmlFor="name" className="form-label">Name</label>
-                <input type="text" className="form-control" id="name" placeholder="John Doe" required />
+                <label htmlFor="name" className="form-label">
+                  Name
+                </label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="name"
+                  name="name"
+                  placeholder="John Doe"
+                  required
+                />
               </div>
               <div className="mb-3">
-                <label htmlFor="email" className="form-label">Email</label>
-                <input type="email" className="form-control" id="email" placeholder="johndoe@gmail.com" required />
+                <label htmlFor="email" className="form-label">
+                  Email
+                </label>
+                <input
+                  type="email"
+                  className="form-control"
+                  id="email"
+                  name="email"
+                  placeholder="johndoe@gmail.com"
+                  required
+                />
               </div>
               <div className="mb-3">
-                <label htmlFor="message" className="form-label">Message</label>
-                <textarea className="form-control" id="message" rows="4" placeholder="Type your message here..." required></textarea>
+                <label htmlFor="message" className="form-label">
+                  Message
+                </label>
+                <textarea
+                  className="form-control"
+                  id="message"
+                  name="message"
+                  rows="4"
+                  placeholder="Type your message here..."
+                  required
+                ></textarea>
               </div>
-              <button type="submit" className="btn btn-custom w-100">Send Message</button>
+              <button
+                type="submit"
+                className="btn btn-custom w-100"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? "Sending…" : "Send Message"}
+              </button>
+
+              {status === "success" && (
+                <div className="alert alert-success mt-3 mb-0" role="alert">
+                  Thank you! Your message has been sent.
+                </div>
+              )}
+              {status === "error" && (
+                <div className="alert alert-danger mt-3 mb-0" role="alert">
+                  Sorry, something went wrong. Please try again later.
+                </div>
+              )}
             </form>
           </div>
         </div>
