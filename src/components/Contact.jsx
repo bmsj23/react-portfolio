@@ -6,63 +6,61 @@ function Contact() {
 
   const formspreeFormId = import.meta.env.VITE_FORMSPREE_FORM_ID || "";
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    if (!formspreeFormId) {
-      setStatus("error");
-      console.error(
-        "Missing VITE_FORMSPREE_FORM_ID. Add it to your .env and restart."
-      );
-      return;
-    }
+  const form = e.target;
 
-    const form = e.target;
-    const formData = new FormData(form);
+  // Check HTML5 validity
+  if (!form.checkValidity()) {
+    form.reportValidity();
+    return;
+  }
 
-    // Honeypot: if filled, treat as spam and "succeed" silently
-    const honeypot = formData.get("website");
-    if (honeypot) {
+  const formData = new FormData(form);
+
+  const honeypot = formData.get("website");
+  if (honeypot) {
+    setStatus("success");
+    form.reset();
+    return;
+  }
+
+  const payload = {
+    name: formData.get("name"),
+    email: formData.get("email"),
+    message: formData.get("message"),
+    _subject: "New message from portfolio contact form",
+  };
+
+  try {
+    setIsSubmitting(true);
+    setStatus(null);
+    const response = await fetch(
+      `https://formspree.io/f/${formspreeFormId}`,
+      {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      }
+    );
+
+    if (response.ok) {
       setStatus("success");
       form.reset();
-      return;
-    }
-
-    const payload = {
-      name: formData.get("name"),
-      email: formData.get("email"),
-      message: formData.get("message"),
-      _subject: "New message from portfolio contact form",
-    };
-
-    try {
-      setIsSubmitting(true);
-      setStatus(null);
-      const response = await fetch(
-        `https://formspree.io/f/${formspreeFormId}`,
-        {
-          method: "POST",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(payload),
-        }
-      );
-
-      if (response.ok) {
-        setStatus("success");
-        form.reset();
-      } else {
-        setStatus("error");
-      }
-    } catch (err) {
-      console.error(err);
+    } else {
       setStatus("error");
-    } finally {
-      setIsSubmitting(false);
     }
-  };
+  } catch (err) {
+    console.error(err);
+    setStatus("error");
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
   return (
     <section id="contact" className="py-5">
