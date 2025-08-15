@@ -50,7 +50,6 @@ function About() {
   return (
     <>
       <section id="about" className="about-section py-5 mt-navbar">
-        <div className="noise-overlay"></div>
         <div className="container">
           <div className="row align-items-center justify-content-center">
             <div
