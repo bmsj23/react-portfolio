@@ -105,12 +105,12 @@ const handleSubmit = async (e) => {
               </button>
 
               {status === "success" && (
-                <div className="alert alert-success mt-3 mb-0" role="alert">
+                <div className="alert alert-success mt-3 mb-0 text-center" role="alert">
                   Thank you! Your message has been sent.
                 </div>
               )}
               {status === "error" && (
-                <div className="alert alert-danger mt-3 mb-0" role="alert">
+                <div className="alert alert-danger mt-3 mb-0 text-center" role="alert">
                   Sorry, something went wrong. Please try again later.
                 </div>
               )}
