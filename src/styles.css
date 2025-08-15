@@ -520,7 +520,6 @@ section .container {
   color: #fff;
 }
 
-/* Ensure View Project buttons in modals have proper styling */
 .modal-body .btn-custom {
   background-color: #34a853 !important;
   color: #fff !important;
