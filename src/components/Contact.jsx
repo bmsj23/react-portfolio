@@ -4,7 +4,6 @@ function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [status, setStatus] = useState(null); // 'success' | 'error' | null
 
-  // Configure your Formspree form ID via Vite env or inline string
   const formspreeFormId = import.meta.env.VITE_FORMSPREE_FORM_ID || "";
 
   const handleSubmit = async (e) => {
@@ -80,52 +79,24 @@ function Contact() {
               onSubmit={handleSubmit}
               noValidate
             >
-              {/* Honeypot field (hidden for users) */}
-              <input
-                type="text"
-                name="website"
-                className="d-none"
-                tabIndex="-1"
-                autoComplete="off"
-              />
+              <input type="text" name="website" className="d-none" tabIndex="-1" autoComplete="off" />
               <div className="mb-3">
                 <label htmlFor="name" className="form-label">
                   Name
                 </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="name"
-                  name="name"
-                  placeholder="John Doe"
-                  required
-                />
+                <input type="text" className="form-control" id="name" name="name" placeholder="John Doe" required />
               </div>
               <div className="mb-3">
                 <label htmlFor="email" className="form-label">
                   Email
                 </label>
-                <input
-                  type="email"
-                  className="form-control"
-                  id="email"
-                  name="email"
-                  placeholder="johndoe@gmail.com"
-                  required
-                />
+                <input type="email" className="form-control" id="email" name="email" placeholder="johndoe@gmail.com" required />
               </div>
               <div className="mb-3">
                 <label htmlFor="message" className="form-label">
                   Message
                 </label>
-                <textarea
-                  className="form-control"
-                  id="message"
-                  name="message"
-                  rows="4"
-                  placeholder="Type your message here..."
-                  required
-                ></textarea>
+                <textarea className="form-control" id="message" name="message" rows="4" placeholder="Type your message here..." required></textarea>
               </div>
               <button
                 type="submit"
