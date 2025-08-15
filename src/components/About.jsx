@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useMemo } from "react";
-import benePic from "../assets/images/bene_pic.png";
 
 function TypingName() {
   const parts = useMemo(
@@ -58,7 +57,7 @@ function About() {
             >
               <div className="glassDiv">
                 <div className="liquidGlassOverlay" />
-                <img src={benePic} alt="My Portrait" className="glass-img" />
+                <img src="/images/bene_pic.png" alt="My Portrait" className="glass-img" />
               </div>
             </div>
 

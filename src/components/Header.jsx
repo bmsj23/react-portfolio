@@ -31,7 +31,7 @@ function Header() {
 
       let scrollPosition = sectionTop + sectionHeight - viewportHeight;
 
-      if (sectionOffsets.hasOwnProperty(targetId)) {
+      if (targetId in sectionOffsets) {
         scrollPosition += sectionOffsets[targetId];
       }
 

@@ -1,7 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import acupProject from "../assets/images/acup-project.png";
-import budgetCalculatorProject from "../assets/images/budgetcalculator-project.png";
-import spotifySongProject from "../assets/images/spotifysong-project.png";
 
 function Projects() {
   const [bgColor, setBgColor] = useState("#f8f9fa");
@@ -66,7 +63,7 @@ function Projects() {
                 <div className="card projects-card h-100 stack-card">
                   <div className="card-img-wrap">
                     <img
-                      src={acupProject}
+                      src="/images/acup-project.png"
                       className="card-img-top"
                       alt="Ancillary Communication and Updates Platform"
                     />
@@ -98,7 +95,7 @@ function Projects() {
                 <div className="card projects-card h-100 stack-card">
                   <div className="card-img-wrap">
                     <img
-                      src={budgetCalculatorProject}
+                      src="/images/budgetcalculator-project.png"
                       className="card-img-top"
                       alt="Budget Calculator"
                     />
@@ -130,7 +127,7 @@ function Projects() {
                 <div className="card projects-card h-100 stack-card">
                   <div className="card-img-wrap">
                     <img
-                      src={spotifySongProject}
+                      src="/images/spotifysong-project.png"
                       className="card-img-top"
                       alt="Mood-Based Random Spotify Song Generator"
                     />
@@ -185,7 +182,7 @@ function Projects() {
             </div>
             <div className="modal-body">
               <img
-                src={acupProject}
+                src="/images/acup-project.png"
                 alt="Ancillary Communication and Updates Platform"
                 className="img-fluid rounded mb-3 w-100"
               />
@@ -230,7 +227,7 @@ function Projects() {
             </div>
             <div className="modal-body">
               <img
-                src={budgetCalculatorProject}
+                src="/images/budgetcalculator-project.png"
                 alt="Budget Calculator"
                 className="img-fluid rounded mb-3 w-100"
               />
@@ -274,7 +271,7 @@ function Projects() {
             </div>
             <div className="modal-body">
               <img
-                src={spotifySongProject}
+                src="/images/spotifysong-project.png"
                 alt="Mood-Based Random Spotify Song Generator"
                 className="img-fluid rounded mb-3 w-100"
               />
