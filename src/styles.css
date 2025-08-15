@@ -520,6 +520,24 @@ section .container {
   color: #fff;
 }
 
+/* Ensure View Project buttons in modals have proper styling */
+.modal-body .btn-custom {
+  background-color: #34a853 !important;
+  color: #fff !important;
+  border: none !important;
+  font-family: Inter, sans-serif;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 6px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.modal-body .btn-custom:hover {
+  background-color: #277b3e !important;
+  color: #fff !important;
+  text-decoration: none;
+}
+
 /* Contact Section */
 #contact {
   background: linear-gradient(180deg, #42be6db2 5%, #e8e8e8 60%);

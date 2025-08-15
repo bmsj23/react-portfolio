@@ -4,7 +4,7 @@ function Footer() {
     return (
         <section id="footer" className="text-center">
         <div className="container wide">
-            <p>© 2025 Benedict San Juan. Made with React.</p>
+            <p>© 2025 Benedict San Juan. Made with React + Vite.</p>
             <div className="social-icons">
             <a href="http://github.com/bmsj23" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                 <i className="fa-brands fa-github fa-lg"></i>

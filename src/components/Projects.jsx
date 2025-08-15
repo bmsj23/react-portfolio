@@ -6,6 +6,11 @@ import spotifySongProject from "../assets/images/spotifysong-project.png";
 function Projects() {
   const [bgColor, setBgColor] = useState("#f8f9fa");
   const sectionRef = useRef(null);
+  const projectLinks = {
+    project1: "https://ancillary-acup.vercel.app/",
+    project2: "https://budget-calculator-ben.vercel.app/",
+    project3: "https://randomsong-project.vercel.app/",
+  };
 
   // animation effect for the projects section
   useEffect(() => {
@@ -190,6 +195,14 @@ function Projects() {
                 Division. It facilitates real-time announcements, scheduling,
                 and collaborative tools for staff members.
               </p>
+              <a
+                href={projectLinks.project1}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-custom w-100"
+              >
+                View Project
+              </a>
             </div>
           </div>
         </div>
@@ -226,6 +239,14 @@ function Projects() {
                 need to save daily, weekly, or monthly to afford their desired
                 purchases or expenses.
               </p>
+              <a
+                href={projectLinks.project2}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-custom w-100"
+              >
+                View Project
+              </a>
             </div>
           </div>
         </div>
@@ -262,6 +283,14 @@ function Projects() {
                 the user's current mood, helping discover new music aligned with
                 how they feel.
               </p>
+              <a
+                href={projectLinks.project3}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-custom w-100"
+              >
+                View Project
+              </a>
             </div>
           </div>
         </div>
